@@ -1,0 +1,14 @@
+artifact_uri: file:///C:/Users/harsh/Machine%20Learning/MLOP/NetworkSecurity/mlruns/0/92c0ded9b70d477ca2253352d68249ac/artifacts
+end_time: 1758787974419
+entry_point_name: ''
+experiment_id: '0'
+lifecycle_stage: active
+run_id: 92c0ded9b70d477ca2253352d68249ac
+run_name: secretive-hawk-115
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1758787969625
+status: 3
+tags: []
+user_id: harsh

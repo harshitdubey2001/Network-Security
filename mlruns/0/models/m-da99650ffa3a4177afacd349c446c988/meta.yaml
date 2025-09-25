@@ -1,0 +1,10 @@
+artifact_location: file:///C:/Users/harsh/Machine%20Learning/MLOP/NetworkSecurity/mlruns/0/models/m-da99650ffa3a4177afacd349c446c988/artifacts
+creation_timestamp: 1758787969768
+experiment_id: '0'
+last_updated_timestamp: 1758787974401
+model_id: m-da99650ffa3a4177afacd349c446c988
+model_type: null
+name: model
+source_run_id: 92c0ded9b70d477ca2253352d68249ac
+status: 2
+status_message: null

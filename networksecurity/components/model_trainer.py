@@ -27,6 +27,15 @@ from sklearn.ensemble import (
    GradientBoostingClassifier,
    RandomForestClassifier,
 )
+import joblib
+import mlflow
+import dagshub
+
+dagshub.init(repo_owner='harshitdubey7896', repo_name='Network-Security')
+mlflow.set_tracking_uri("https://dagshub.com/harshitdubey7896/Network-Security.mlflow") 
+mlflow.set_experiment("Network-Security-Experiment")
+
+
 
 
 class ModelTrainer:
@@ -36,17 +45,25 @@ class ModelTrainer:
             self.data_transformation_artifact=data_transformation_artifact
         except Exception as e:
           raise NetworkSecurityException(e,sys)
+        
+    def track_mlflow(self, best_model, train_metric, test_metric):
+     with mlflow.start_run():
+        # Log metrics
+        mlflow.log_metric("train_f1_score", train_metric.f1_score)
+        mlflow.log_metric("train_precision", train_metric.precision_score)
+        mlflow.log_metric("train_recall", train_metric.recall_score)
+        mlflow.log_metric("test_f1_score", test_metric.f1_score)
+        mlflow.log_metric("test_precision", test_metric.precision_score)
+        mlflow.log_metric("test_recall", test_metric.recall_score)
 
-    def track_mlflow(self,best_model,classificationmetric):
-            with mlflow.start_run():
-                f1_score=classificationmetric.f1_score
-                precision_score=classificationmetric.precision_score
-                recall_score=classificationmetric.recall_score
+        # Save model locally
+        model_path = "best_model.pkl"
+        joblib.dump(best_model, model_path)
 
-                mlflow.log_metric("f1_score",f1_score)
-                mlflow.log_metric("precision",precision_score)
-                mlflow.log_metric("recall_score",recall_score)
-                mlflow.sklearn.log_model(best_model,"model")
+        # Log as artifact (works on DagsHub)
+        mlflow.log_artifact(model_path, artifact_path="model")
+
+    
                 
 
         
@@ -110,15 +127,15 @@ class ModelTrainer:
 
         # Metrics
         classification_train_metric = get_classification_score(y_true=y_train, y_pred=best_model.predict(X_train))
-
-        self.track_mlflow(best_model,classification_train_metric)
-
         classification_test_metric = get_classification_score(y_true=y_test, y_pred=best_model.predict(x_test))
-        self.track_mlflow(best_model,classification_test_metric)
+
+        self.track_mlflow(best_model, classification_train_metric, classification_test_metric)
 
         # Save final model with preprocessor
         preprocessor = load_object(file_path=self.data_transformation_artifact.transformed_object_file_path)
         network_model = NetworkModel(preprocessor=preprocessor, model=best_model)
+        
+        save_object("final_model/model.pkl",best_model)
 
         model_dir_path = os.path.dirname(self.model_trainer_config.trained_model_file_path)
         os.makedirs(model_dir_path, exist_ok=True)

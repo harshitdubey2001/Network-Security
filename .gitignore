@@ -137,6 +137,9 @@ celerybeat.pid
 # Artifacts
 artifacts/
 
+#Mlruns
+mlruns/
+
 # Environments
 mlproject_env/
 .env

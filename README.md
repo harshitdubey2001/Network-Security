@@ -116,11 +116,6 @@ val1,val2,val3,...,valN
 
 ---
 
-## License
-This project is licensed under the **MIT License**. See the [LICENSE](LICENSE) file for details.
-
----
-
 ## Contact
 - **Harshit Dubey**  
 - Email: harshitdubey7896@gmail.com  

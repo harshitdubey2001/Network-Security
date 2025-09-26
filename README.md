@@ -1,9 +1,9 @@
 # Network Security Detection ML Project
 
-![Python](https://img.shields.io/badge/Python-3.10-blue.svg)
-![Streamlit](https://img.shields.io/badge/Streamlit-1.26-orange.svg)
-![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.2.2-green.svg)
-![License](https://img.shields.io/badge/License-MIT-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.13-blue.svg)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.50.0-orange.svg)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-1.7.2-green.svg)
+
 
 ---
 
